@@ -15,14 +15,32 @@ describe( "pacman", function () {
     });
 
     it("traverses generic.txt", function () {
-        expect(main.pacman("generic.txt")).toEqual([6,1,27]);
+        expect(main.pacman("text_inputs/generic.txt")).toEqual([6,1,27]);
     });
 
     it("doesn't run for edge.txt", function () {
-        expect(main.pacman("edge.txt")).toEqual([-1,-1,0]);
+        expect(main.pacman("text_inputs/edge.txt")).toEqual([-1,-1,0]);
     });
 
     it("traverses runtime.txt", function () {
-        expect(main.pacman("runtime.txt")).toEqual([2142,147,148]);
+        expect(main.pacman("text_inputs/runtime.txt")).toEqual([2142,147,148]);
     });
+
+    
+    it("doesn't run if initial data doesn't include at least three lines (board dimensions, initial coords, moves)", function () {
+        expect(main.pacman("text_inputs/edge_data.txt")).toEqual([-1,-1,0]);
+    })
+
+    it("throws error if initial coords are invalid", function () {
+        expect(main.pacman("text_inputs/edge_initial_wall.txt")).toEqual([-1,-1,0]);
+        expect(main.pacman("text_inputs/edge_initial.txt")).toEqual([-1,-1,0]);
+    })
+
+    it("doesn't run if wall coords are invalid", function () {
+        expect(main.pacman("text_inputs/edge_wall.txt")).toEqual([-1,-1,0]);
+    })
+    
+    it("doesn't run if movement char is invalid", function () {
+        expect(main.pacman("text_inputs/edge_movement.txt")).toEqual([-1,-1,0]);
+    })
 });
